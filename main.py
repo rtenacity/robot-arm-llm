@@ -42,3 +42,5 @@ def move_to_point(x, y, z, speed=50):
 def main():
     print("hello")
     initialize(50)
+    
+main()
