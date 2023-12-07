@@ -38,4 +38,4 @@ def move_to_point(x, y, z, speed=50):
     pass
 
 def main():
-    pass
+    initialize()
