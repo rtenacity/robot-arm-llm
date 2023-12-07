@@ -19,15 +19,15 @@ def calibrate():
     for motor in motor_list:
         calibrated = False
         while calibrated == False:
-            if btn.left():
+            if btn.left:
                 motor.on_for_degrees(50, 10)
-            elif btn.right():
+            elif btn.right:
                 motor.on_for_degrees(50, -10)
-            elif btn.up():
+            elif btn.up:
                 motor.on_for_degrees(20, 2)
-            elif btn.down():
+            elif btn.down:
                 motor.on_for_degrees(20, -2)
-            elif btn.enter():
+            elif btn.enter:
                 calibrated = True
             
 def initialize(cal_speed):
