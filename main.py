@@ -30,6 +30,7 @@ def calibrate():
                 motor.on_for_degrees(20, -2)
             elif btn.enter:
                 calibrated = True
+            sleep(0.05)
             
 def initialize(cal_speed):
     print("initializing")
