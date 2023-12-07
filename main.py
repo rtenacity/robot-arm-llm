@@ -15,6 +15,7 @@ pos = Position()
 
 
 def calibrate():
+    print('calibrating')
     for motor in motor_list:
         calibrated = False
         while calibrated == False:
@@ -30,6 +31,7 @@ def calibrate():
                 calibrated = True
             
 def initialize(cal_speed):
+    print("initializing")
     calibrate()
     touch.wait_for_bump()
     
@@ -38,4 +40,5 @@ def move_to_point(x, y, z, speed=50):
     pass
 
 def main():
-    initialize()
+    print("hello")
+    initialize(50)
