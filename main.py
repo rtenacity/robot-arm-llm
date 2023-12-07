@@ -2,16 +2,16 @@ from ev3dev2.motor import OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D, LargeMotor, Me
 from ev3dev2.sensor.lego import GyroSensor, TouchSensor
 from ev3dev2.button import Button
 from time import sleep
+from position import Position
 
 revolver = LargeMotor(OUTPUT_A)
 shoulder = LargeMotor(OUTPUT_B)
 elbow = LargeMotor(OUTPUT_C)
 claw = MediumMotor(OUTPUT_D)
-gyro = GyroSensor()
 touch = TouchSensor()
-gyro.MODE_GYRO_G_A()
 btn = Button()
 motor_list = [revolver, shoulder, elbow, claw]
+pos = Position()
 
 
 def calibrate():
@@ -32,7 +32,7 @@ def calibrate():
 def initialize(cal_speed):
     calibrate()
     touch.wait_for_bump()
-    gyro.calibrate()
+    
     
 def move_to_point(x, y, z, speed=50):
     pass
