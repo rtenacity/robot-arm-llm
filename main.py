@@ -17,6 +17,7 @@ pos = Position()
 def calibrate():
     print('calibrating')
     for motor in motor_list:
+        print(motor)
         calibrated = False
         while calibrated == False:
             if btn.left:
