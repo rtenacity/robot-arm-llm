@@ -4,10 +4,10 @@ from ev3dev2.button import Button
 from time import sleep
 from position import Position
 
-revolver = LargeMotor(OUTPUT_A)
-shoulder = LargeMotor(OUTPUT_B)
-elbow = LargeMotor(OUTPUT_C)
-claw = MediumMotor(OUTPUT_D)
+revolver = LargeMotor(OUTPUT_D)
+shoulder = LargeMotor(OUTPUT_C)
+elbow = LargeMotor(OUTPUT_B)
+claw = MediumMotor(OUTPUT_A)
 touch = TouchSensor()
 btn = Button()
 motor_list = [revolver, shoulder, elbow, claw]
