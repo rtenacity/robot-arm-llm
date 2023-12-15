@@ -2,6 +2,7 @@ from ev3dev2.motor import OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D, LargeMotor, Me
 from ev3dev2.sensor.lego import GyroSensor, TouchSensor
 from ev3dev2.button import Button
 from time import sleep
+import math
 from position import Position
 
 revolver = LargeMotor(OUTPUT_D)
@@ -11,8 +12,27 @@ claw = MediumMotor(OUTPUT_A)
 touch = TouchSensor()
 btn = Button()
 motor_list = [revolver, shoulder, elbow, claw]
+initial = Position(0,0,0)
 pos = Position()
 
+def increase_arm_length_3d(pos1, new_length):
+    temp_x = pos1.get_x()
+    temp_y = pos1.get_y()
+    temp_z = pos1.get_z()
+
+    # TODO: Make the angle from the motor encoder rather than calculating it using x and y 
+    
+    angle_xy = math.atan2(temp_y, temp_x)
+
+    new_x = new_length * math.cos(angle_xy)
+    new_y = new_length * math.sin(angle_xy)
+
+    # TODO: Add logic for moving arm forward and backward after configuration is set up
+      
+    return new_x, new_y, temp_z 
+
+
+    
 
 def calibrate():
     print('calibrating')
