@@ -36,12 +36,12 @@ def extend_to_length(pos, length):
 def angles_to_move(pos1, pos2):
     x1, y1, z1 = pos1.get_pos()
     x2, y2, z2 = pos2.get_pos()
-    
     xy_theta = math.acos(((x1 * x2) + (y1 * y2))/( (math.sqrt(x1**2 + y1**2)) * (math.sqrt(x2**2 + y2**2))))
-    xy_degrees = math.round(math.degrees(xy_theta))
     yz_theta = math.acos(((y1 * y2) + (z1 * z2))/( (math.sqrt(y1**2 + z1**2)) * (math.sqrt(y2**2 + z2**2))))
-    yz_degrees= math.round(math.degrees(yz_theta), 5)
-    
+    xy_degrees = round(math.degrees(xy_theta))
+
+    yz_degrees= round(math.degrees(yz_theta), 5)
+
     return xy_degrees, yz_degrees
 
 def get_instructions(pos1, pos2):
@@ -51,6 +51,12 @@ def get_instructions(pos1, pos2):
     init_adjusted_pos = extend_to_length(init_pos, get_length(origin, target_pos))   
     angles = angles_to_move(init_adjusted_pos, target_pos)
     return init_adjusted_pos.__str__(), angles
+
+
+def get_horizontal_length(l1, ang1, l2, ang2):
+    seg_1 = l1 * math.cos(math.radians(ang1))
+    seg_2 = l2 * math.cos(math.radians(ang2))
+    return seg_1 + seg_2
 
 #* CODE TESTING
 
