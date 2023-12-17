@@ -16,8 +16,10 @@ class Position:
     def get_pos(self):
         return self.x, self.y, self.z
 
-    def __str__(self):
-        return f'(x={self.x}, y={self.y}, z={self.z})'
+    
+    #TODO uncomment when upgraded bruh stfg
+    # def __str__(self):
+    #     return f'(x={self.x}, y={self.y}, z={self.z})'
 
 def get_length(pos1, pos2):
     p1, p2 = pos1.get_pos(), pos2.get_pos()
