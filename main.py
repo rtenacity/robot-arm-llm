@@ -5,11 +5,11 @@ from time import sleep
 import math
 from position import Position, get_instructions
 
-revolver = LargeMotor(OUTPUT_D)
+revolver = LargeMotor(OUTPUT_A)
 shoulder = LargeMotor(OUTPUT_C)
 elbow = LargeMotor(OUTPUT_B)
-claw = MediumMotor(OUTPUT_A)
-touch = TouchSensor()
+claw = MediumMotor(OUTPUT_D)
+#touch = TouchSensor()
 btn = Button()
 motor_list = [revolver, shoulder, elbow, claw]
 initial = Position(0,2,0)
@@ -37,7 +37,7 @@ def calibrate():
 def initialize(cal_speed):
     print("initializing")
     calibrate()
-    touch.wait_for_bump()
+    #touch.wait_for_bump()
     
     
 def move_to_point(x, y, z, speed=50):
