@@ -12,12 +12,12 @@ class Bot:
         self.elbow = LargeMotor(elbow)
         self.claw = MediumMotor(claw)
         self.btn = Button()
-        self.shoulder_length = 7
-        self.elbow_length = 7
+        self.shoulder_length = 7 #temp 
+        self.elbow_length = 7 #temp
         self.motor_list = [self.revolver, self.shoulder, self.elbow, self.claw]
+        self.offset = 6 #temp
         self.pos = None
-        self.ang1 = None
-        self.ang2 = None
+        self.revolver_vertical_angle = None
         
     def reset(self):
         for motor in self.motor_list:
@@ -49,7 +49,7 @@ class Bot:
                 delta_pos = pos_f - pos_i
                 motor.reset()
                 motor.on_for_degrees(50, 0)
-                motor.position = delta_pos
+                motor.position, self.revolver_vertical_angle = delta_pos
             else:
                 while calibrated == False:
                     move = input("hjkl (y): ")
@@ -73,10 +73,20 @@ class Bot:
         length, beta = get_length_and_angle(self.shoulder_length, self.shoulder.position, self.elbow_length, self.elbow.position)
         self.pos = get_coordinates(length=length, alpha=self.revolver.position, beta=beta)
         
-            
     def initialize(self):
         self.reset()
         self.calibrate()
+        self.calculate_position()
+        
+    def move_to_point(self, target_pos):
+        target_length = get_length(Position(0, 0, 0), target_pos)
+        a, b, c = get_angles_triangle(self.shoulder_length, self.elbow_length, target_length)
+        xy_theta, yz_theta = angles_to_move(self.pos, target_pos)
+        c_theta = (135 + self.elbow.position) - c
+        self.shoulder.on_for_degrees(50, b)
+        self.elbow.on_for_degrees(50, c_theta)
+        self.revolver.on_for_degrees(50, xy_theta)
+        self.shoulder.on_for_degrees(50, yz_theta)
         self.calculate_position()
         
 
