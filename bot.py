@@ -13,6 +13,12 @@ class Bot:
         self.btn = Button()
         self.motor_list = [self.revolver, self.shoulder, self.elbow, self.claw]
         self.pos = None
+        self.ang1 = None
+        self.ang2 = None
+        
+    def reset(self):
+        for motor in self.motor_list:
+            motor.reset()
         
     def calibrate(self):
         print('calibrating')
@@ -20,14 +26,23 @@ class Bot:
             print(motor)
             calibrated = False
             while calibrated == False:
-                if self.btn.left:
+                move = input("hjkl (y): ")
+                if move == 'h':
                     motor.on_for_degrees(50, 10)
-                elif self.btn.right:
+                elif move == 'l':
                     motor.on_for_degrees(50, -10)
-                elif self.btn.up:
+                elif move == 'j':
                     motor.on_for_degrees(20, 2)
-                elif self.btn.down:
+                elif move == 'k':
                     motor.on_for_degrees(20, -2)
-                elif self.btn.enter:
+                elif move == 'y':
                     calibrated = True
+                else:
+                    pass
                 sleep(0.08)
+            motor.reset()
+            motor.on_for_degrees(50, 0)
+            
+    def initialize(self):
+        self.reset()
+        self.calibrate()

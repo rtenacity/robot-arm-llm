@@ -63,6 +63,6 @@ def get_horizontal_length(l1, ang1, l2, ang2):
 #* CODE TESTING
 
 init_pos = Position(0, 2, 0)
-target_pos = Position(2, 2, 0)
+target_pos = Position(0, 2, 2)
 instructions = get_instructions(init_pos, target_pos)
 print(instructions)
