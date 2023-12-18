@@ -15,6 +15,9 @@ class Position:
 
     def get_pos(self):
         return self.x, self.y, self.z
+    
+    def __str__(self):
+        return "x: " + str(self.x) + " y: " + str(self.y) + " z: " + str(self.z)
 
     
     #TODO uncomment when upgraded bruh stfg
@@ -55,14 +58,27 @@ def get_instructions(pos1, pos2):
     return init_adjusted_pos.__str__(), angles
 
 
-def get_horizontal_length(l1, ang1, l2, ang2):
-    seg_1 = l1 * math.cos(math.radians(ang1))
-    seg_2 = l2 * math.cos(math.radians(ang2))
-    return seg_1 + seg_2
+def get_length_and_angle(l1, ang1, l2, ang2):
+    v1x = l1 * math.cos(math.radians(ang1))
+    v1y = l1 * math.sin(math.radians(ang1))
+    v2x = l2 * math.cos(math.radians(ang2))
+    v2y = l2 * math.sin(math.radians(ang2))
+    length = math.sqrt((v1x + v2x)**2 + (v1y + v2y)**2)
+    angle = math.degrees(math.atan2((v1y + v2y), (v1x + v2x)))
+    return [length, angle]
+
+def get_coordinates(length, alpha, beta):
+    x = length * math.sin(math.radians(beta)) * math.sin(math.radians(alpha))
+    y = length * math.cos(math.radians(beta))
+    z = length * math.sin(math.radians(beta)) * math.cos(math.radians(alpha))
+    return Position(x, y, z)
+    
 
 #* CODE TESTING
 
-init_pos = Position(0, 2, 0)
-target_pos = Position(0, 2, 2)
-instructions = get_instructions(init_pos, target_pos)
-print(instructions)
+print(get_coordinates(12.934313455158016, 0, 22.5))
+
+# init_pos = Position(0, 2, 0)
+# target_pos = Position(0, 2, 2)
+# instructions = get_instructions(init_pos, target_pos)
+# print(instructions)
