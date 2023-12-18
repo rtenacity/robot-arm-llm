@@ -71,7 +71,7 @@ class Bot:
         
     def calculate_position(self):
         length, beta = get_length_and_angle(self.shoulder_length, self.shoulder.position, self.elbow_length, self.elbow.position)
-        self.pos = get_coordinates(length=length, alpha=self.revolver.position, beta=beta)
+        self.pos = get_coordinates(length=length, alpha=self.revolver.position, beta=beta, offset=self.offset)
         
     def initialize(self):
         self.reset()
