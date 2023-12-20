@@ -62,10 +62,10 @@ def get_length_and_angle(l1, ang1, l2, ang2):
     angle = math.degrees(math.atan2((v1y + v2y), (v1x + v2x)))
     return [length, angle]
 
-def get_coordinates(length, alpha, beta, offset):
-    x = (length * math.sin(math.radians(beta)) * math.sin(math.radians(alpha))) - (offset*math.sin(math.radians(alpha)))
-    y = length * math.cos(math.radians(beta)) - (offset*math.cos(math.radians(alpha)))
-    z = length * math.sin(math.radians(beta)) * math.cos(math.radians(alpha)) 
+def get_coordinates(length, alpha, beta, back_offset, vertical_offset):
+    x = (length * math.sin(math.radians(beta)) * math.sin(math.radians(alpha))) - (back_offset*math.sin(math.radians(alpha)))
+    y = length * math.cos(math.radians(beta)) - (back_offset*math.cos(math.radians(alpha)))
+    z = length * math.sin(math.radians(beta)) * math.cos(math.radians(alpha)) + vertical_offset
     return Position(x, y, z)
 
 def get_angles_triangle(a, b, c):
@@ -76,7 +76,6 @@ def get_angles_triangle(a, b, c):
     return [math.degrees(a_theta), math.degrees(b_theta), math.degrees(c_theta)]
 
 #* CODE TESTING
-
 # print(get_coordinates(12.934313455158016, 0, 22.5, 1))
 
 # init_pos = Position(0, 2, 0)
