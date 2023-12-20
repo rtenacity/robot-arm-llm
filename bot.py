@@ -113,7 +113,7 @@ class Bot:
         xy_theta, yz_theta = angles_to_move(self.pos, target_pos)
         print(b_theta, yz_theta, xy_theta)
         self.revolver.on_for_degrees(50, xy_theta)
-        self.shoulder.on_for_degrees(50, yz_theta)
+        self.shoulder.on_for_degrees(50, -yz_theta)
         self.calculate_position()
         
 
