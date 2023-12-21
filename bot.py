@@ -101,9 +101,9 @@ class Bot:
         
         target_length = get_length(Position(0, 0, 0), target_pos)
         a, b, c = get_angles_triangle(self.shoulder_length, self.elbow_length, target_length)
-        b_theta = (45 + self.shoulder.position) - b
+        b_theta = (45 + self.shoulder.position) - b # temp
 
-        c_theta = (135 + self.elbow.position) - c
+        c_theta = (135 + self.elbow.position) - c # temp
         
         self.shoulder.on_for_degrees(5, -b_theta)
         
