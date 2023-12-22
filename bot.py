@@ -93,16 +93,27 @@ class Bot:
         
         target_length = get_length(Position(0, 0, 0), target_pos)
         a, b, c = get_angles_triangle(self.shoulder_length, self.elbow_length, target_length)
+        
         b_theta = (45 + self.shoulder.position) - b # temp
-
-        c_theta = (135 + self.elbow.position) - c # temp    
+        c_theta = (135 + self.elbow.position) - c # temp
+        
+        
+        print("b_theta: " + str(b_theta)) 
         self.shoulder.on_for_degrees(5, -b_theta)
+        sleep(0.5)
+        
+        print("c_theta: " + str(c_theta)) 
         self.elbow.on_for_degrees(5, -c_theta)
+        sleep(0.5)
+        
+        
         self.calculate_position()
         xy_theta, yz_theta = angles_to_move(self.pos, target_pos)
-        print(b_theta, yz_theta, xy_theta)
-        self.revolver.on_for_degrees(50, xy_theta)
-        self.shoulder.on_for_degrees(50, -yz_theta)
+        print(yz_theta, xy_theta)
+        self.revolver.on_for_degrees(50, -xy_theta)
+        self.shoulder.on_for_degrees(10, -yz_theta)
         self.calculate_position()
+        
+        
         
 
