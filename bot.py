@@ -84,6 +84,8 @@ class Bot:
         
     def move_to_point(self, target_pos):
         
+        #TODO: implement PID for the point
+        
         tempX, tempY, tempZ = target_pos.get_pos()
         
         alpha, beta = angles_to_move(self.pos, target_pos)
