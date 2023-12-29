@@ -1,5 +1,4 @@
-# robot thing
-write math maybe if i want to
-also draw 
+# Robot Project
 
 ![Alt text](images/image.png)
+Robot v1 (Designed in Lego Studio)
