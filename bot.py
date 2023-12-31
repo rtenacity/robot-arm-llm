@@ -15,8 +15,8 @@ class Bot:
         self.shoulder_length = 6.2 #temp 
         self.elbow_length = 3.75 #temp
         self.motor_list = [self.revolver, self.shoulder, self.elbow, self.claw]
-        self.back_offset = 3 #temp
-        self.vertical_offset = 0 #temp
+        self.back_offset = 3.008 # (9.4 * 0.32) <- could change
+        self.vertical_offset = 3.008 # (9.4 * 0.32) <- could change
         self.pos = None
         self.revolver_vertical_angle = None
         

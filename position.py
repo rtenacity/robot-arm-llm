@@ -76,9 +76,14 @@ def get_angles_triangle(a, b, c):
     return [math.degrees(a_theta), math.degrees(b_theta), math.degrees(c_theta)]
 
 #* CODE TESTING
-# print(get_coordinates(12.934313455158016, 0, 22.5, 1))
 
-# init_pos = Position(0, 2, 0)
-# target_pos = Position(0, 2, 2)
-# instructions = get_instructions(init_pos, target_pos)
-# print(instructions)
+def test():
+    print(get_coordinates(12.934313455158016, 0, 22.5, 1))
+
+    init_pos = Position(0, 2, 0)
+    target_pos = Position(0, 2, 2)
+    instructions = get_instructions(init_pos, target_pos)
+    print(instructions)
+
+if __name__ == '__main__':
+    test()
