@@ -12,11 +12,11 @@ class Bot:
         self.elbow = LargeMotor(elbow)
         self.claw = MediumMotor(claw)
         self.btn = Button()
-        self.shoulder_length = 6.2 #temp 
+        self.shoulder_length = 6 #temp 
         self.elbow_length = 3.75 #temp
         self.motor_list = [self.revolver, self.shoulder, self.elbow, self.claw]
-        self.back_offset = 3.008 # (9.4 * 0.32) <- could change
-        self.vertical_offset = 3.008 # (9.4 * 0.32) <- could change
+        self.back_offset = 2.8 # (9.4 * 0.32) <- could change
+        self.vertical_offset = 1.5 # (9.4 * 0.32) <- could change
         self.pos = None
         self.revolver_vertical_angle = None
         
@@ -105,7 +105,7 @@ class Bot:
         sleep(0.5)
         
         print("c_theta: " + str(c_theta)) 
-        self.elbow.on_for_degrees(5, -c_theta)
+        self.elbow.on_for_degrees(5, c_theta)
         sleep(0.5)
         
         
@@ -116,6 +116,3 @@ class Bot:
         self.shoulder.on_for_degrees(10, -yz_theta)
         self.calculate_position()
         
-        
-        
-

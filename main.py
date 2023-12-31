@@ -7,7 +7,7 @@ arm = Bot(OUTPUT_A, OUTPUT_C, OUTPUT_B, OUTPUT_D)
 def main():
     arm.initialize()
     print(arm.get_pos())
-    arm.move_to_point(Position(0, 6, 0))
+    arm.move_to_point(Position(0, 5.5, 1))
     print(arm.get_pos())
     
 if __name__ == '__main__':

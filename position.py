@@ -52,6 +52,12 @@ def get_instructions(pos1, pos2):
     angles = angles_to_move(init_adjusted_pos, target_pos)
     return init_adjusted_pos.__str__(), angles
 
+def get_angles_triangle(a, b, c):
+    c_theta = math.acos((a**2 + b**2 - c**2) / (2 * a * b))
+    a_theta = math.acos((b**2 + c**2 - a**2) / (2 * b * c))
+    b_theta = math.pi - a_theta - c_theta
+
+    return [math.degrees(a_theta), math.degrees(b_theta), math.degrees(c_theta)]
 
 def get_length_and_angle(l1, ang1, l2, ang2):
     v1x = l1 * math.cos(math.radians(ang1))
@@ -65,25 +71,16 @@ def get_length_and_angle(l1, ang1, l2, ang2):
 def get_coordinates(length, alpha, beta, back_offset, vertical_offset):
     x = (length * math.sin(math.radians(beta)) * math.sin(math.radians(alpha))) - (back_offset*math.sin(math.radians(alpha)))
     y = length * math.cos(math.radians(beta)) - (back_offset*math.cos(math.radians(alpha)))
-    z = length * math.sin(math.radians(beta)) * math.cos(math.radians(alpha)) + vertical_offset
+    z = (length * math.sin(math.radians(beta)) * math.cos(math.radians(alpha))) + vertical_offset
     return Position(x, y, z)
 
-def get_angles_triangle(a, b, c):
-    c_theta = math.acos((a**2 + b**2 - c**2) / (2 * a * b))
-    a_theta = math.acos((b**2 + c**2 - a**2) / (2 * b * c))
-    b_theta = math.pi - a_theta - c_theta
 
-    return [math.degrees(a_theta), math.degrees(b_theta), math.degrees(c_theta)]
 
 #* CODE TESTING
 
 def test():
-    print(get_coordinates(12.934313455158016, 0, 22.5, 1))
-
-    init_pos = Position(0, 2, 0)
-    target_pos = Position(0, 2, 2)
-    instructions = get_instructions(init_pos, target_pos)
-    print(instructions)
+    #WRITE TEST CODE HERE
+    pass
 
 if __name__ == '__main__':
     test()
