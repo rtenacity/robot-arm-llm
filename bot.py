@@ -83,29 +83,37 @@ class Bot:
         
         
     def move_to_point(self, target_pos):
+        alpha, beta = angles_to_move(self.pos, target_pos)
+        tx, ty, tz = self.pos.get_pos()
+        tx += self.back_offset*math.sin(math.radians(alpha))
+        ty += self.back_offset*math.cos(math.radians(alpha))
+        current_pos = Position(tx, ty, tz)
         
+        print("original length: " + str(get_length(Position(0,0,0), current_pos)))
         #TODO: implement PID for the point
         
         tempX, tempY, tempZ = target_pos.get_pos()
         
-        alpha, beta = angles_to_move(self.pos, target_pos)
+       
         tempX += self.back_offset*math.sin(math.radians(alpha))
         tempY += self.back_offset*math.cos(math.radians(alpha))
         target_pos = Position(tempX, tempY, tempZ)
         
         target_length = get_length(Position(0, 0, 0), target_pos)
+        print("target length: " + str(target_length))
         a, b, c = get_angles_triangle(self.shoulder_length, self.elbow_length, target_length)
         
         b_theta = (45 + self.shoulder.position) - b # temp
         c_theta = (135 + self.elbow.position) - c # temp
         
         
-        print("b_theta: " + str(b_theta)) 
-        self.shoulder.on_for_degrees(5, -b_theta)
+        print("current shoulder position: " + str(self.shoulder.position) + " b_theta: " + str(b_theta)) 
+        self.shoulder.on_for_degrees(5, b_theta) #! this is taking too much load, need to figure out what the actual hell to do about this
         sleep(0.5)
+        print("after shoulder position " + str(self.shoulder.position))
         
         print("c_theta: " + str(c_theta)) 
-        self.elbow.on_for_degrees(5, c_theta)
+        self.elbow.on_for_degrees(5, c_theta) #! Figure out what the direction of the motor is
         sleep(0.5)
         
         
@@ -113,6 +121,6 @@ class Bot:
         xy_theta, yz_theta = angles_to_move(self.pos, target_pos)
         print(yz_theta, xy_theta)
         self.revolver.on_for_degrees(50, -xy_theta)
-        self.shoulder.on_for_degrees(10, -yz_theta)
+        #self.shoulder.on_for_degrees(10, -yz_theta)
         self.calculate_position()
         

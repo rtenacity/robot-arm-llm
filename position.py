@@ -79,7 +79,7 @@ def get_coordinates(length, alpha, beta, back_offset, vertical_offset):
 #* CODE TESTING
 
 def test():
-    #WRITE TEST CODE HERE
+    print(get_length(Position(0,0,0), Position(0, 5.5, 1)))
     pass
 
 if __name__ == '__main__':
