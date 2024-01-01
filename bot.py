@@ -16,7 +16,7 @@ class Bot:
         self.elbow_length = 3.75 #temp
         self.motor_list = [self.revolver, self.shoulder, self.elbow, self.claw]
         self.back_offset = 2.8 # (9.4 * 0.32) <- could change
-        self.vertical_offset = 1.5 # (9.4 * 0.32) <- could change
+        self.vertical_offset = 3 # (9.4 * 0.32) <- could change
         self.pos = None
         self.revolver_vertical_angle = None
         
@@ -107,20 +107,23 @@ class Bot:
         c_theta = (135 + self.elbow.position) - c # temp
         
         
-        print("current shoulder position: " + str(self.shoulder.position) + " b_theta: " + str(b_theta)) 
-        self.shoulder.on_for_degrees(5, b_theta) #! this is taking too much load, need to figure out what the actual hell to do about this
-        sleep(0.5)
+        print("current shoulder position: " + str(self.shoulder.position) + " b_theta: " + str(b_theta))
+        if b_theta >= 0: 
+            print("big money")
+            self.shoulder.on_for_degrees(50, b_theta) 
+        else:
+            print("nah not happening")
+            self.shoulder.on_for_degrees(5, b_theta)
         print("after shoulder position " + str(self.shoulder.position))
         
         print("c_theta: " + str(c_theta)) 
-        self.elbow.on_for_degrees(5, c_theta) #! Figure out what the direction of the motor is
-        sleep(0.5)
+        self.elbow.on_for_degrees(5, c_theta)
         
         
         self.calculate_position()
         xy_theta, yz_theta = angles_to_move(self.pos, target_pos)
         print(yz_theta, xy_theta)
         self.revolver.on_for_degrees(50, -xy_theta)
-        #self.shoulder.on_for_degrees(10, -yz_theta)
+        self.shoulder.on_for_degrees(10, -yz_theta)
         self.calculate_position()
         
