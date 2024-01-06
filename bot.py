@@ -24,6 +24,10 @@ class Bot:
         for motor in self.motor_list:
             motor.reset()
             
+    def motor_still(self):
+        for motor in self.motor_list:
+            motor.on_for_degrees(0, 0)
+            
     def get_pos(self):
         return self.pos.__str__()
         
@@ -78,6 +82,7 @@ class Bot:
         
     def initialize(self):
         self.reset()
+        self.motor_still()
         self.calibrate()
         self.calculate_position()
         
@@ -89,8 +94,9 @@ class Bot:
         ty += self.back_offset*math.cos(math.radians(alpha))
         current_pos = Position(tx, ty, tz)
         
-        print("original length: " + str(get_length(Position(0,0,0), current_pos)))
+        reached = False
         #TODO: implement PID for the point
+        
         
         tempX, tempY, tempZ = target_pos.get_pos()
         
@@ -100,29 +106,24 @@ class Bot:
         target_pos = Position(tempX, tempY, tempZ)
         
         target_length = get_length(Position(0, 0, 0), target_pos)
-        print("target length: " + str(target_length))
         a, b, c = get_angles_triangle(self.shoulder_length, self.elbow_length, target_length)
         
         b_theta = (45 + self.shoulder.position) - b # temp
         c_theta = (135 + self.elbow.position) - c # temp
         
         
-        print("current shoulder position: " + str(self.shoulder.position) + " b_theta: " + str(b_theta))
         if b_theta >= 0: 
             print("big money")
-            self.shoulder.on_for_degrees(50, b_theta) 
+            self.shoulder.on_for_degrees(50, b_theta, block = False) 
         else:
             print("nah not happening")
-            self.shoulder.on_for_degrees(5, b_theta)
-        print("after shoulder position " + str(self.shoulder.position))
+            self.shoulder.on_for_degrees(5, b_theta, block = False)
         
-        print("c_theta: " + str(c_theta)) 
         self.elbow.on_for_degrees(5, c_theta)
         
         
         self.calculate_position()
         xy_theta, yz_theta = angles_to_move(self.pos, target_pos)
-        print(yz_theta, xy_theta)
         self.revolver.on_for_degrees(50, -xy_theta)
         self.shoulder.on_for_degrees(10, -yz_theta)
         self.calculate_position()
